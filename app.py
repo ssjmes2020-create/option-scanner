@@ -19,13 +19,12 @@ with st.sidebar:
     tg_token = st.text_input("Telegram Bot Token (ऐच्छिक)", type="password", key="tg_token")
     tg_chat = st.text_input("Telegram Chat ID (ऐच्छिक)", key="tg_chat")
     start_scan = st.checkbox("🟢 स्कॅनर चालू करा", key="start_scan")
-    
-    if st.button("🔴 Logout करा"):
+    def clear_all():
         for k in ["api_key", "client_id", "pin", "totp_key", "tg_token", "tg_chat"]:
             st.session_state[k] = ""
         st.session_state["start_scan"] = False
-        st.rerun()
 
+    st.button("🔴 Logout करा", on_click=clear_all)
 def send_tg(msg):
     if tg_token and tg_chat:
         try:
