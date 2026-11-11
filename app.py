@@ -19,6 +19,9 @@ with st.sidebar:
     tg_token = st.text_input("Telegram Bot Token (ऐच्छिक)", type="password")
     tg_chat = st.text_input("Telegram Chat ID (ऐच्छिक)")
     start_scan = st.checkbox("🟢 स्कॅनर चालू करा")
+    if st.button("🔴 Logout करा"):
+    st.session_state.clear()
+    st.rerun()
 
 def send_tg(msg):
     if tg_token and tg_chat:
