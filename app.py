@@ -12,15 +12,18 @@ st.title("🎯 4-Pillar Option Buying Scanner - Angel One")
 with st.sidebar:
     st.header("🔐 Angel One सेटिंग्ज")
     idx = st.selectbox("इंडेक्स निवडा", ["NIFTY", "BANKNIFTY"])
-    api_key = st.text_input("API Key", type="password")
-    client_id = st.text_input("Client ID")
-    pin = st.text_input("MPIN", type="password")
-    totp_key = st.text_input("TOTP Secret Key", type="password")
-    tg_token = st.text_input("Telegram Bot Token (ऐच्छिक)", type="password")
-    tg_chat = st.text_input("Telegram Chat ID (ऐच्छिक)")
-    start_scan = st.checkbox("🟢 स्कॅनर चालू करा")
+    api_key = st.text_input("API Key", type="password", key="api_key")
+    client_id = st.text_input("Client ID", key="client_id")
+    pin = st.text_input("MPIN", type="password", key="pin")
+    totp_key = st.text_input("TOTP Secret Key", type="password", key="totp_key")
+    tg_token = st.text_input("Telegram Bot Token (ऐच्छिक)", type="password", key="tg_token")
+    tg_chat = st.text_input("Telegram Chat ID (ऐच्छिक)", key="tg_chat")
+    start_scan = st.checkbox("🟢 स्कॅनर चालू करा", key="start_scan")
+    
     if st.button("🔴 Logout करा"):
-        st.session_state.clear()
+        for k in ["api_key", "client_id", "pin", "totp_key", "tg_token", "tg_chat"]:
+            st.session_state[k] = ""
+        st.session_state["start_scan"] = False
         st.rerun()
 
 def send_tg(msg):
